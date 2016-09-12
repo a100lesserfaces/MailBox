@@ -12,22 +12,21 @@ public class Mailbox {
 		Display my_display = new Display();
 		Shell my_shell = new Shell(my_display);
 		my_shell.setText("Send a letter to Santa");
-		my_shell.setBounds(320, 320, 420, 320);
+		my_shell.setBounds(320, 320, 520, 420);
 		my_shell.setLayout(new FillLayout());
 		Label label = new Label(my_shell, SWT.WRAP | SWT.CENTER | SWT.LEFT);
 		label.setText("Outline your Present by manually selecting waveforms.");
 		Listener listener =  new SelectWaveform();
 		label.addListener(SWT.MouseDoubleClick, listener);
 		
+		// this gets all of the waveforms currently installed in SDRROOT
 		String location = System.getenv("SDRROOT") + "//dom//waveforms";
 		File waveforms_folder = new File(location);
 		final Tree tree = new Tree(my_shell, 0);
-		TreeItem placeholder = new TreeItem(tree, 0);
-		placeholder.setText("placeholder");
 		for (File file_entry : waveforms_folder.listFiles()) {
 			TreeItem topLevel = new TreeItem(tree, 0);
 			topLevel.setText(file_entry.getName());
-			// working on the nested
+			// nested under rh
 			if (file_entry.getName().equals("rh")) {
 				for (File file_entry2 : file_entry.listFiles()) {
 					TreeItem lowerLevel = new TreeItem(topLevel,0);
